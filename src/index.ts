@@ -43,7 +43,7 @@ async function main(){
     tickLog(`Initiating in ${response.value}...`)
 
     try {
-        downloadAndExtractRepo(response.value, type.value, "Nitlix")
+        downloadAndExtractRepo(response.value, type.value, "Kars")
     }
     catch (error) {
         errorLog(`Failed to download repo.`)
