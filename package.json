@@ -1,0 +1,25 @@
+{
+  "name": "create-kapp",
+  "version": "1.1.0",
+  "description": "🎊 A brand new kApp quickstarter for all platforms.",
+  "keywords": [
+    "next.js",
+    "kars",
+    "prepacked"
+  ],
+  "author": "kars",
+  "license": "MIT",
+  "dependencies": {
+    "extract-zip": "^2.0.1",
+    "fs-extra": "^11.1.1",
+    "kolorist": "^1.8.0",
+    "prompts": "^2.4.2"
+  },
+  "bin": {
+    "create-kapp": "./dist/index.js"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.1",
+    "@types/prompts": "^2.4.4"
+  }
+}
