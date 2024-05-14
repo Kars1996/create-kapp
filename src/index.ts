@@ -22,7 +22,7 @@ async function main(){
 
     const types = [
         "Template",
-        "TsTemplate"
+        "APITemplate"
     ]
 
     const type = await prompts({
