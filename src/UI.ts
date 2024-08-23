@@ -1,4 +1,4 @@
-import { cyan, green, red, white } from "kolorist";
+import { cyan, green, red, white, bold } from "kolorist";
 // import terminalLink from "terminal-link";
 import prompts from "prompts";
 
@@ -46,12 +46,12 @@ export default class UI {
     }
 
     public static end(): void {
-        console.log(green(`${cyan("o")}  **Template Successfully Initialized!**`));
+        console.log(green(`${cyan("o")}  ${bold('Template Successfully Initialized!')}`));
         this.bleh();
         console.log(`${cyan("o")}  Links -------------${cyan("+")}`);
         console.log(`|                     |`);
-        console.log(`|  - @${this.github}     |`);
-        console.log(`|  - ${this.website}     |`);
+        console.log(`|  - @${this.github}        |`);
+        console.log(`|  - ${this.website}         |`);
         console.log(`|                     |`);
         console.log(`${cyan("+")}---------------------${cyan("+")}`);
         this.bleh();

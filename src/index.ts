@@ -23,7 +23,7 @@ async function main() {
         "Which Template Category would you like to use?",
         ["Next.js", "Discord.js", "General"]
     );
-
+    UI.bleh();
     console.log(
         `${cyan("o")}   ${icons[templateCategory]} ${cyan(
             `${templateCategory}`
