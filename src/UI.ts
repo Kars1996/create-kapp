@@ -4,6 +4,8 @@ import prompts from "prompts";
 
 export default class UI {
     // ! TS Compiler gets angry
+    // TODO: Fix terminal links
+    // TODO: Make own verson of prompts
     // private static github = cyan(
     //     terminalLink("Github", "https://github.com/Kars1996")
     // );
