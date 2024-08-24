@@ -2,6 +2,10 @@
 
 KAPP is a CLI tool designed to help you quickly set up your projects using pre-defined templates. Whether you're starting a new Next.js app, Discord bot, or any general project, KAPP has got you covered with streamlined setup, customization, and user-friendly interactions.
 
+```bash
+npm i create-kapp@latest -g
+```
+
 ## Features 🌟
 - **Template Categories**: Choose from categories such as Next.js, Discord.js, and General.
 - **Quickstart Templates**: Select predefined project templates like NextTemplate, APITemplate, DJS14Template, and more.
