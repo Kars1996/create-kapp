@@ -13,8 +13,8 @@ const templateOptions = {
 
 const icons = {
     "Next.js": "▲",
-    "Discord.js": "⁜",
-    General: "ↂ",
+    "Discord.js": "§",
+    General: "∂",
 };
 
 type TemplateCategory = keyof typeof templateOptions;

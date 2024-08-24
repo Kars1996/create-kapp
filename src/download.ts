@@ -5,10 +5,9 @@ import path from "path";
 import extract from "extract-zip";
 import fse from "fs-extra";
 import UI from "./UI";
-import { bold } from "kolorist";
 
-export async function download(folder: string, repo: string) {
-    const url = `https://github.com/kars1996/${repo}/archive/refs/heads/master.zip`;
+export async function download(folder: string, repo: string, branch: string = "master") {
+    const url = `https://github.com/kars1996/${repo}/archive/refs/heads/${branch}.zip`;
     const response = await fetch(url);
     console.log("o  Installing...");
     if (!response.ok) {
@@ -43,5 +42,4 @@ export async function download(folder: string, repo: string) {
     // await fse.remove(path.join(outputPath, ".git"));
 
     UI.bleh();
-    console.log(`o  ${bold(`${repo}  Sucessfully Initialised!`)}`);
 }

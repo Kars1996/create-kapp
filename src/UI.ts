@@ -33,13 +33,12 @@ export default class UI {
         title: string,
         options: T[]
     ): Promise<T> {
-        // console.log(cyan(`o   ${title}`));
         const response = await prompts({
             type: "select",
             name: "value",
             message: `${title}`,
             choices: options.map((option) => ({
-                title: ` ${option}`,
+                title: option,
                 value: option,
             })),
         });
