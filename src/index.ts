@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import UI from "./UI";
 import prompts from "prompts";
 import { cyan, green, red, white } from "kolorist";

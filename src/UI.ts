@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { cyan, green, red, white, bold } from "kolorist";
 // import terminalLink from "terminal-link";
 import prompts from "prompts";
