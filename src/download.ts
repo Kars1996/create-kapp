@@ -7,6 +7,7 @@ import fse from "fs-extra";
 import UI from "./UI";
 
 export async function download(folder: string, repo: string, branch: string = "master") {
+    // Credit to nitlix
     const url = `https://github.com/kars1996/${repo}/archive/refs/heads/${branch}.zip`;
     const response = await fetch(url);
     console.log("o  Installing...");
@@ -39,7 +40,6 @@ export async function download(folder: string, repo: string, branch: string = "m
     }
 
     await fse.remove(sourceFolder);
-    // await fse.remove(path.join(outputPath, ".git"));
 
     UI.bleh();
 }
