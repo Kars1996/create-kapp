@@ -36,7 +36,7 @@ export default class UI {
         const response = await prompts({
             type: "select",
             name: "value",
-            message: `${title}`,
+            message: `   ${title}`,
             choices: options.map((option) => ({
                 title: option,
                 value: option,

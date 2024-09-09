@@ -5,12 +5,17 @@ import path from "path";
 import extract from "extract-zip";
 import fse from "fs-extra";
 import UI from "./UI";
+import { cyan } from "kolorist";
 
-export async function download(folder: string, repo: string, branch: string = "master") {
-    // Credit to nitlix
+export async function download(
+    folder: string,
+    repo: string,
+    branch: string = "master"
+) {
+    // ? Credit to nitlix
+    console.log(`${cyan("o")}  Installing...`);
     const url = `https://github.com/kars1996/${repo}/archive/refs/heads/${branch}.zip`;
     const response = await fetch(url);
-    console.log("o  Installing...");
     if (!response.ok) {
         throw new Error(`Failed to download repo: ${response.statusText}`);
     }
@@ -28,7 +33,7 @@ export async function download(folder: string, repo: string, branch: string = "m
     await extract(zipPath, { dir: outputPath });
     fs.unlinkSync(zipPath);
 
-    const sourceFolder = path.join(outputPath, `${repo}-master`);
+    const sourceFolder = path.join(outputPath, `${repo}-${branch}`);
     const files = await fse.readdir(sourceFolder);
 
     for (const file of files) {
