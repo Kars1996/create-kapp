@@ -18,6 +18,14 @@ const main = () => {
             return
         }
         console.log("Sucessfully bumped version")
+        exec("npm i create-kapp@latest -g", (err, stdout, stderr) => {
+          if (err) {
+            console.log("Failed to install create-kapp@latest globally. \x1b[37m");
+            console.log(err);
+            process.exit(1);
+          }
+          console.log("Updated local version")
+        })
     })
   })
 };
