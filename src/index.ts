@@ -41,7 +41,7 @@ async function main() {
     const response = await prompts({
         type: "text",
         name: "path",
-        message: "   Select A FilePath:",
+        message: "  Select A FilePath:",
         validate: (value: string) => {
             if (value.length == 0 || !value) {
                 return `Please enter a valid path.`;
@@ -51,8 +51,13 @@ async function main() {
     });
 
     UI.bleh();
-
-    await download(response.path, template);
+    try {
+        await download(response.path, template);
+    } catch {
+        console.error(red("Failed to download template."));
+        UI.feedback();
+        process.exit(1);
+    }
 
     UI.end();
 }
