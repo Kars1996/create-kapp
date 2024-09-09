@@ -41,7 +41,7 @@ async function main() {
     const response = await prompts({
         type: "text",
         name: "path",
-        message: "Select A FilePath:",
+        message: "   Select A FilePath:",
         validate: (value: string) => {
             if (value.length == 0 || !value) {
                 return `Please enter a valid path.`;
