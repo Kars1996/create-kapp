@@ -19,14 +19,22 @@ export default class UI {
         console.log(white(`|`));
     }
     public static header(): void {
-        console.log(`${cyan("o")}   --------------------------------------------${cyan("+")}`);
+        console.log(
+            `${cyan("o")}   --------------------------------------------${cyan(
+                "+"
+            )}`
+        );
         console.log(`|                                               |`);
         console.log(
             `|   Welcome to ${cyan("KAPP")}. Let's make your project!   |`
         );
         console.log(`|                                               |`);
-        console.log(`${cyan("o")}   --------------------------------------------${cyan("+")}`);
-        this.bleh()
+        console.log(
+            `${cyan("o")}   --------------------------------------------${cyan(
+                "+"
+            )}`
+        );
+        this.bleh();
     }
 
     public static async choice<T extends string>(
@@ -47,16 +55,20 @@ export default class UI {
     }
 
     public static end(): void {
-        console.log(green(`${cyan("o")}  ${bold('Template Successfully Initialized!')}`));
+        console.log(
+            green(
+                `${cyan("o")}   ${bold("Template Successfully Initialized!")}`
+            )
+        );
         this.bleh();
-        console.log(`${cyan("o")}  Links -------------${cyan("+")}`);
-        console.log(`|                     |`);
-        console.log(`|  - @${this.github}        |`);
-        console.log(`|  - ${this.website}         |`);
-        console.log(`|                     |`);
-        console.log(`${cyan("+")}---------------------${cyan("+")}`);
+        console.log(`${cyan("o")}   Links -------------${cyan("+")}`);
+        console.log(`|                      |`);
+        console.log(`|   - @${this.github}        |`);
+        console.log(`|   - ${this.website}         |`);
+        console.log(`|                      |`);
+        console.log(`${cyan("+")}  --------------------${cyan("+")}`);
         this.bleh();
-        console.log(`+ Have Feedback? Dm me @ ${this.github}`);
+        console.log(`${cyan("+")}   Have Feedback? Dm me @ ${this.github}`);
     }
 
     public static feedback(): void {

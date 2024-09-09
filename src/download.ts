@@ -13,7 +13,7 @@ export async function download(
     branch: string = "master"
 ) {
     // ? Credit to nitlix
-    console.log(`${cyan("o")}  Installing...`);
+    console.log(`${cyan("o")}   Installing...`);
     const url = `https://github.com/kars1996/${repo}/archive/refs/heads/${branch}.zip`;
     const response = await fetch(url);
     if (!response.ok) {
