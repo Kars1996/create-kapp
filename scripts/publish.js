@@ -21,7 +21,7 @@ const main = () => {
         exec("npm i create-kapp@latest -g", (err, stdout, stderr) => {
           if (err) {
             console.log("Failed to install create-kapp@latest globally. \x1b[37m");
-            console.log(err);
+            console.log(stdout);
             process.exit(1);
           }
           console.log("Updated local version")
