@@ -55,7 +55,7 @@ async function main() {
 
     UI.bleh();
     try {
-        // await download(response.path, template);
+        await download(response.path, template);
     } catch {
         console.error(red("Failed to download template."));
         UI.feedback();
@@ -73,7 +73,7 @@ async function main() {
         });
 
         if (response.value) {
-            exec("git add .", (err) => {
+            await exec("git add .", (err) => {
                 if (err) {
                     console.error("Error adding files to git:", err);
                     return;
