@@ -4,6 +4,8 @@ import UI from "./UI";
 import prompts from "prompts";
 import { cyan, green, red, white } from "kolorist";
 import { download } from "./download";
+import * as fs from "fs";
+import { exec } from "child_process";
 
 const templateOptions = {
     "Next.js": ["Template", "APITemplate"],
@@ -40,6 +42,7 @@ async function main() {
     UI.bleh();
     const response = await prompts({
         type: "text",
+        initial: ".",
         name: "path",
         message: "  Select A FilePath:",
         validate: (value: string) => {
@@ -52,13 +55,49 @@ async function main() {
 
     UI.bleh();
     try {
-        await download(response.path, template);
+        // await download(response.path, template);
     } catch {
         console.error(red("Failed to download template."));
         UI.feedback();
         process.exit(1);
     }
 
+    if (fs.existsSync(".git")) {
+        const response = await prompts({
+            type: 'toggle',
+            name: 'value',
+            message: '  Would you like to commit these changes?',
+            initial: true,
+            active: 'yes',
+            inactive: 'no'
+        });
+
+        if (response.value) {
+            exec("git add .", (err) => {
+                if (err) {
+                    console.error("Error adding files to git:", err);
+                    return;
+                }
+
+                exec(
+                    'git commit -m "🚀Initialised Repository" -m "Powered by create-kapp"',
+                    (commitErr) => {
+                        if (commitErr) {
+                            console.error(
+                                red(`Error committing changes: ${commitErr}`)
+                            );
+                            return;
+                        }
+                        UI.bleh();
+                        UI.print("Commited to repository sucessfully!")
+                        return;
+                    }
+                );
+            });
+        } else {
+            UI.bleh()
+        }
+    }
     UI.end();
 }
 

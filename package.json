@@ -1,6 +1,6 @@
 {
   "name": "create-kapp",
-  "version": "2.1.16",
+  "version": "2.2.0",
   "description": "🎊 A brand new kApp quickstarter for all platforms.",
   "keywords": [
     "next.js",
@@ -24,6 +24,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "publish": "node scripts/publish.js"
+    "publishscript": "node scripts/publish.js"
   }
 }

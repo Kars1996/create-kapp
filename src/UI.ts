@@ -54,6 +54,11 @@ export default class UI {
         return response.value as T;
     }
 
+    public static print(text: string): void {
+        console.log(`${cyan("o")}     ${bold(text)}`);
+        this.bleh();
+    }
+
     public static end(): void {
         console.log(
             green(
