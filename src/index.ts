@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import UI from "./UI";
+import Setup from "./setup";
 import prompts from "prompts";
 import { cyan, green, red, white } from "kolorist";
 import { download } from "./download";
@@ -19,10 +20,13 @@ const icons = {
     General: "∂",
 };
 
+const dev = process.argv.includes("--test");
+
 type TemplateCategory = keyof typeof templateOptions;
 
 async function main() {
     UI.header();
+
     const templateCategory: TemplateCategory = await UI.choice(
         "Which Template Category would you like to use?",
         ["Next.js", "Discord.js", "General"]
@@ -35,69 +39,57 @@ async function main() {
     );
 
     UI.bleh();
+
     const template = await UI.choice(
         "Which Quickstart would you like to use?",
         templateOptions[templateCategory]
     );
     UI.bleh();
-    const response = await prompts({
-        type: "text",
-        initial: ".",
-        name: "path",
-        message: "  Select A FilePath:",
-        validate: (value: string) => {
-            if (value.length == 0 || !value) {
-                return `Please enter a valid path.`;
-            }
-            return true;
-        },
-    });
 
-    UI.bleh();
+    const response = await UI.text("Select a filePath", ".");
+
     try {
-        await download(response.path, template);
+        if (!dev) {
+            await download(response, template);
+        }
     } catch {
         console.error(red("Failed to download template."));
         UI.feedback();
         process.exit(1);
     }
 
+    const useNPM = await UI.bool(
+        "Would you like to use NPM to install packages?"
+    );
+    if (useNPM) {
+        await Setup.NPMinstall();
+    }
+
+    const name = await UI.text(
+        "What do you want your project called?",
+        "kars-project"
+    );
+    await Setup.editName(name);
+
     if (fs.existsSync(".git")) {
-        const response = await prompts({
-            type: 'toggle',
-            name: 'value',
-            message: '  Would you like to commit these changes?',
-            initial: true,
-            active: 'yes',
-            inactive: 'no'
-        });
-
-        if (response.value) {
-            await exec("git add .", (err) => {
-                if (err) {
-                    console.error("Error adding files to git:", err);
-                    return;
-                }
-
-                exec(
-                    'git commit -m "🚀Initialised Repository" -m "Powered by create-kapp"',
-                    (commitErr) => {
-                        if (commitErr) {
-                            console.error(
-                                red(`Error committing changes: ${commitErr}`)
-                            );
-                            return;
-                        }
-                        UI.bleh();
-                        UI.print("Commited to repository sucessfully!")
-                        return;
-                    }
-                );
-            });
+        const commitResponse = await UI.bool(
+            "Would you like to commit these changes?"
+        );
+        if (commitResponse) {
+            const commitSuccess = await Setup.commit();
+            if (commitSuccess) {
+                UI.bleh();
+                UI.print("Commited to repository successfully!");
+            }
         } else {
-            UI.bleh()
+            UI.bleh();
+        }
+    } else {
+        if (await UI.bool("Would you like to init a git repo?")) {
+            await Setup.initGitRepo();
         }
     }
+
     UI.end();
 }
 

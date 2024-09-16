@@ -1,19 +1,12 @@
 #!/usr/bin/env node
 
 import { cyan, green, red, white, bold } from "kolorist";
-// import terminalLink from "terminal-link";
 import prompts from "prompts";
 
 export default class UI {
-    // ! TS Compiler gets angry
     // TODO: Fix terminal links
-    // TODO: Make own verson of prompts
-    // private static github = cyan(
-    //     terminalLink("Github", "https://github.com/Kars1996")
-    // );
-    // private static website = cyan(terminalLink("Websiet", "https://kars.bio"));
-    private static github = cyan("Kars1996");
-    private static website = cyan("kars.bio");
+    private static readonly github = cyan("Kars1996");
+    private static readonly website = cyan("kars.bio");
 
     public static bleh(): void {
         console.log(white(`|`));
@@ -54,11 +47,40 @@ export default class UI {
         return response.value as T;
     }
 
-    public static print(text: string): void {
-        console.log(`${cyan("o")}     ${bold(text)}`);
+    public static async bool(prompt: string): Promise<boolean> {
+        const response = await prompts({
+            type: "toggle",
+            name: "value",
+            message: `  ${prompt}`,
+            initial: false,
+            active: "yes",
+            inactive: "no",
+        });
         this.bleh();
+
+        return response.value;
+    }
+    public static async text(
+        prompt: string,
+        defaultValue?: string
+    ): Promise<string> {
+        const response = await prompts({
+            type: "text",
+            name: "value",
+            message: `  ${prompt}`,
+            initial: defaultValue,
+            validate: (value: string) =>
+                value ? true : `Please enter a valid value.`,
+        });
+        this.bleh();
+
+        return response.value;
     }
 
+    public static print(prompt: string) {
+        console.log(`${cyan("o")}   ${white(bold(prompt))}`);
+        this.bleh();
+    }
     public static end(): void {
         console.log(
             green(
