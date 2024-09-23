@@ -76,7 +76,6 @@ export default class Setup {
                             );
                             return reject(false);
                         }
-                        UI.print("Commited to repository successfully!");
                         resolve(true);
                     }
                 );
