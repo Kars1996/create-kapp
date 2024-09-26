@@ -1,4 +1,6 @@
-# KAPP - Kickstart Your Project with Ease 🚀
+# KAPP - Kickstart Your Project with Ease 🚀 
+
+### Consider giving this a ⭐ to show support!
 
 KAPP is a CLI tool designed to help you quickly set up your projects using pre-defined templates. Whether you're starting a new Next.js app, Discord bot, or any general project, KAPP has got you covered with streamlined setup, customization, and user-friendly interactions.
 
@@ -70,10 +72,11 @@ kapp-cli/
 ├── src/
 │   ├── download.ts       # Handles downloading and extracting project templates.
 │   ├── index.ts          # Main CLI logic and user interaction.
+│   ├── setup.ts          # CLI Utilitys for setting up the project.
 │   └── ui.ts             # Custom UI elements and interactions.
 ├── package.json          # NPM dependencies and scripts.
 ├── tsconfig.json         # TypeScript configuration.
-└── README.md             # Project documentation (you are here).
+└── README.md             # Project documentation (you are here!).
 ```
 ---
 
