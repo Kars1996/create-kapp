@@ -21,6 +21,7 @@ export default class UI {
         console.log(
             `|   Welcome to ${cyan("KAPP")}. Let's make your project!   |`
         );
+
         console.log(`|                                               |`);
         console.log(
             `${cyan("o")}   --------------------------------------------${cyan(
@@ -28,7 +29,12 @@ export default class UI {
             )}`
         );
         if (dev) {
-            this.print(`${gray("(Dev Mode)")}: Files will not be created/modified`)
+            this.bleh();
+            console.log(
+                `${green("√")}   ${gray(
+                    "(Dev Mode)"
+                )}: Files will not be created/modified`
+            );
         }
         this.bleh();
     }

@@ -25,7 +25,7 @@ const dev = process.argv.includes("--test");
 type TemplateCategory = keyof typeof templateOptions;
 
 async function main() {
-    UI.header();
+    UI.header(dev);
 
     const templateCategory: TemplateCategory = await UI.choice(
         "Which Template Category would you like to use?",
