@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cyan, green, red, white, bold } from "kolorist";
+import { cyan, green, red, white, bold, gray } from "kolorist";
 import prompts from "prompts";
 
 export default class UI {
@@ -11,7 +11,7 @@ export default class UI {
     public static bleh(): void {
         console.log(white(`|`));
     }
-    public static header(): void {
+    public static header(dev: boolean): void {
         console.log(
             `${cyan("o")}   --------------------------------------------${cyan(
                 "+"
@@ -27,6 +27,9 @@ export default class UI {
                 "+"
             )}`
         );
+        if (dev) {
+            this.print(`${gray("(Dev Mode)")}: Files will not be created/modified`)
+        }
         this.bleh();
     }
 
