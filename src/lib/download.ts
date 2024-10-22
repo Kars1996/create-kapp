@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import extract from "extract-zip";
 import fse from "fs-extra";
-import UI from "./UI";
+import UI from "../utils/UI";
 import { cyan } from "kolorist";
 
 export async function download(

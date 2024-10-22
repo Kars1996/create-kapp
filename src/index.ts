@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import UI from "./UI";
-import Setup from "./setup";
+import UI from "./utils/UI";
+import Setup from "./lib/setup";
 import prompts from "prompts";
-import { cyan, green, red, white } from "kolorist";
-import { download } from "./download";
+import { cyan, red } from "kolorist";
+import { download } from "./lib/download";
 import * as fs from "fs";
 import { exec } from "child_process";
 
@@ -20,7 +20,7 @@ const icons = {
     General: "∂",
 };
 
-const dev = process.argv.includes("--test");
+const dev = process.argv.includes("--dev");
 
 type TemplateCategory = keyof typeof templateOptions;
 

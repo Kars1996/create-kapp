@@ -1,0 +1,12 @@
+# Update TODO List
+- [ ] - Wifi Check
+- [ ] - Local Install thing
+- [ ] - More Quickstart Options
+- [ ] - Folder Restructure
+- [ ] - Analytics
+- [ ] - Validation Functions
+- [ ] - Code Optimizations
+- [ ] - Fun Easter Eggs
+- [ ] - Change Usage Flow
+- [ ] - Halloween/Christmas Theme
+- [ ] - More Args
