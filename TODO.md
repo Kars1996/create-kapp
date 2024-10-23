@@ -11,11 +11,13 @@
 - [ ] - Halloween/Christmas Theme
 - [ ] - More Args (No Analytics, Args only install)
 - [ ] - Help Command
+- [ ] - Args Prefill Certain Parts
 
 Args
 `--version | --v` Outputs CLI Version
-`--templatename` Downloads template from name
+`--dl=` Downloads template from name
 `--online | --o` Downloads from online repository (default yes)
 `--url=` Downloads from a specific URL
 `--use<package>` uses a specific package manager (default npm)
 `--path=` Specifies Path (default cwd)
+`--name=` Name of the project (default kars-project)

@@ -7,6 +7,7 @@ import { download } from "./lib/download";
 import * as fs from "fs";
 import { TemplateCategory, icons, templateOptions } from "./data/consts";
 import AnalyticsManager from "./test";
+import ValidationManager from "./utils/validate";
 
 const isDev: boolean = process.argv.includes("--dev");
 
@@ -16,8 +17,9 @@ async function main() {
 
     const templateCategory: TemplateCategory = await UI.choice(
         "Which Template Category would you like to use?",
-        ["Next.js", "Discord.js", "General"]
+        Object.keys(templateOptions) as (keyof typeof templateOptions)[]
     );
+    ValidationManager.
     UI.bleh();
     console.log(
         `${cyan("o")}   ${icons[templateCategory]} ${cyan(
@@ -77,7 +79,7 @@ async function main() {
         }
     }
 
-    UI.end();
+    UI.footer();
 }
 
 main().catch((err) => console.error(red(`Error: ${err.message}`)));

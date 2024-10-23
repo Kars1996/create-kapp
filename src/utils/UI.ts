@@ -90,7 +90,7 @@ export default class UI {
         console.log(`${cyan("o")}   ${white(bold(prompt))}`);
         this.bleh();
     }
-    public static end(): void {
+    public static footer(): void {
         console.log(
             green(
                 `${cyan("o")}   ${bold("Template Successfully Initialized!")}`
