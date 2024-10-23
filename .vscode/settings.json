@@ -1,0 +1,10 @@
+{
+    "cSpell.words": [
+        "cliversion",
+        "consts"
+    ],
+    "editor.codeActionsOnSave": [
+        "source.addMissingImports",
+        "source.fixAll.eslint"
+    ],
+}
