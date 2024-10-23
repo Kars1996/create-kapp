@@ -11,3 +11,11 @@
 - [ ] - Halloween/Christmas Theme
 - [ ] - More Args (No Analytics, Args only install)
 - [ ] - Help Command
+
+Args
+`--version | --v` Outputs CLI Version
+`--templatename` Downloads template from name
+`--online | --o` Downloads from online repository (default yes)
+`--url=` Downloads from a specific URL
+`--use<package>` uses a specific package manager (default npm)
+`--path=` Specifies Path (default cwd)
