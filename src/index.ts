@@ -19,7 +19,7 @@ async function main() {
         "Which Template Category would you like to use?",
         Object.keys(templateOptions) as (keyof typeof templateOptions)[]
     );
-    ValidationManager.
+    ValidationManager.definedCheck(templateCategory);
     UI.bleh();
     console.log(
         `${cyan("o")}   ${icons[templateCategory]} ${cyan(
@@ -43,7 +43,7 @@ async function main() {
         }
     } catch {
         console.error(red("Failed to download template."));
-        UI.feedback();
+        UI.footer();
         process.exit(1);
     }
 

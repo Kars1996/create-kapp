@@ -4,7 +4,6 @@ import { cyan, green, red, white, bold, gray } from "kolorist";
 import prompts from "prompts";
 
 export default class UI {
-    // TODO: Fix terminal links
     private static readonly github = cyan("Kars1996");
     private static readonly website = cyan("kars.bio");
 
@@ -105,9 +104,5 @@ export default class UI {
         console.log(`${cyan("+")}  --------------------${cyan("+")}`);
         this.bleh();
         console.log(`${cyan("+")}   Have Feedback? Dm me @ ${this.github}`);
-    }
-
-    public static feedback(): void {
-        console.log(red(`+ Have Feedback? Visit my **Github**`));
     }
 }

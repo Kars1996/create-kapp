@@ -3,6 +3,7 @@
         "bleh",
         "cliversion",
         "consts",
+        "Initialised",
         "kolorist"
     ],
     "editor.codeActionsOnSave": [

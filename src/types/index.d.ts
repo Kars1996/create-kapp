@@ -23,29 +23,34 @@ export type AnalyticsEventWithCommonProperties = AnalyticsEvent & {
     cliversion: string;
 };
 
+type PackageManagers = "npm" | "pnpm" | "deno" | "bun";
+
 export type ConfigOptions = {
     projectName: string;
     template: string;
     online: boolean;
     analytics: boolean;
     path: string;
-    isDev: boolean,
+    isDev: boolean;
+    packageManager: PackageManagers;
 };
 
-const BaseConfig: ConfigOptions = {
+export const BaseConfig: ConfigOptions = {
     projectName: "kars-project",
     template: "template",
     online: true,
     analytics: true,
     path: ".",
-    isDev: true
+    isDev: true,
+    packageManager: "npm",
 };
 
-const ConfigFlags: Record<keyof ConfigOptions, string[]> = {
+export const ConfigFlags: Record<keyof ConfigOptions, string[]> = {
     projectName: ["--projectName", "-p"],
     template: ["--template", "-t"],
     online: ["--online"],
     analytics: ["--analytics"],
     path: ["--path", "-d"],
-    isDev: ["--dev", "-test"]
+    isDev: ["--dev", "-test"],
+    packageManager: ["--use", "-pm"],
 };

@@ -7,6 +7,7 @@ export default class ValidationManager {
         if (value === undefined || value === null ) {
             UI.print(`${value as unknown as string} cannot be undefined`)
             UI.footer()
+            process.exit(1)
         }
     }
     
