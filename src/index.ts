@@ -2,30 +2,17 @@
 
 import UI from "./utils/UI";
 import Setup from "./lib/setup";
-import prompts from "prompts";
 import { cyan, red } from "kolorist";
 import { download } from "./lib/download";
 import * as fs from "fs";
-import { exec } from "child_process";
+import { TemplateCategory, icons, templateOptions } from "./data/consts";
+import AnalyticsManager from "./test";
 
-const templateOptions = {
-    "Next.js": ["Template", "APITemplate"],
-    "Discord.js": ["DJS14Template", "DJS14Base"],
-    General: ["NextTemplate", "APITemplate"],
-};
-
-const icons = {
-    "Next.js": "▲",
-    "Discord.js": "§",
-    General: "∂",
-};
-
-const dev = process.argv.includes("--dev");
-
-type TemplateCategory = keyof typeof templateOptions;
+const isDev: boolean = process.argv.includes("--dev");
 
 async function main() {
-    UI.header(dev);
+    UI.header(isDev);
+    AnalyticsManager.sendAnalytics({ eventName: "cli_started" });
 
     const templateCategory: TemplateCategory = await UI.choice(
         "Which Template Category would you like to use?",
@@ -49,7 +36,7 @@ async function main() {
     const response = await UI.text("Select a filePath", ".");
 
     try {
-        if (!dev) {
+        if (!isDev) {
             await download(response, template);
         }
     } catch {

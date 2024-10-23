@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
+        "bleh",
         "cliversion",
-        "consts"
+        "consts",
+        "kolorist"
     ],
     "editor.codeActionsOnSave": [
         "source.addMissingImports",

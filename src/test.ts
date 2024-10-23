@@ -1,6 +1,6 @@
 import os from "os";
-import { packageVersion } from "../data/consts";
-import { AnalyticsEvent } from "../types";
+import { packageVersion } from "./data/consts";
+import { AnalyticsEvent } from "./types";
 import crypto from "crypto";
 
 export default class AnalyticsManager {
@@ -31,6 +31,12 @@ export default class AnalyticsManager {
         } catch (e) {
             ("Tomfoolery and such are not supported");
         }
+    }
+
+    public static test() {
+        console.log(this.getAnalyticsId())
+        console.log(this.getMacAddress())
+        console.log(this.getSystemSalt())
     }
 
     private static getAnalyticsId(): string {
@@ -71,3 +77,5 @@ export default class AnalyticsManager {
             .digest("hex");
     }
 }
+
+AnalyticsManager.test()

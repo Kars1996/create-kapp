@@ -9,4 +9,5 @@
 - [ ] - Fun Easter Eggs
 - [ ] - Change Usage Flow
 - [ ] - Halloween/Christmas Theme
-- [ ] - More Args
+- [ ] - More Args (No Analytics, Args only install)
+- [ ] - Help Command
