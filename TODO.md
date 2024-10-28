@@ -12,6 +12,7 @@
 - [ ] - More Args (No Analytics, Args only install)
 - [ ] - Help Command
 - [ ] - Args Prefill Certain Parts
+- [ ] - Update Checking
 
 Args
 `--version | --v` Outputs CLI Version
