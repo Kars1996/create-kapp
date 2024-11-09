@@ -7,6 +7,14 @@ export default class AnalyticsManager {
     private static readonly _analyticsUrl: string =
         "https://kars.bio/api/cli/analytics";
 
+    /**
+     * Sends an analytics event to the API
+     *
+     * @author Kars1996
+     * @date 2024-11-06
+     * @param {any} analyticsEvent:AnalyticsEvent
+     * @returns {any}
+     */
     public static async sendAnalytics(
         analyticsEvent: AnalyticsEvent
     ): Promise<void> {

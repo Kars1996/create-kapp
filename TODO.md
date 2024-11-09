@@ -1,5 +1,5 @@
 # Update TODO List
-- [ ] - Wifi Check
+- [x] - Wifi Check
 - [ ] - Local Install thing
 - [ ] - More Quickstart Options
 - [ ] - Folder Restructure
