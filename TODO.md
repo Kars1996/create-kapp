@@ -3,16 +3,17 @@
 - [ ] - Local Install thing
 - [ ] - More Quickstart Options
 - [ ] - Folder Restructure
-- [ ] - Analytics
+- [x] - Analytics
 - [ ] - Validation Functions
 - [ ] - Code Optimizations
-- [ ] - Fun Easter Eggs
+<!-- - [ ] - Fun Easter Eggs -->
 - [ ] - Change Usage Flow
 - [ ] - Halloween/Christmas Theme
 - [ ] - More Args (No Analytics, Args only install)
 - [ ] - Help Command
 - [ ] - Args Prefill Certain Parts
 - [ ] - Update Checking
+- [ ] - Local Config
 
 Args
 `--version | --v` Outputs CLI Version

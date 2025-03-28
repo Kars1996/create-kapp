@@ -6,8 +6,8 @@ import { cyan, red } from "kolorist";
 import { download } from "./lib/download";
 import * as fs from "fs";
 import { TemplateCategory, icons, templateOptions } from "./data/consts";
-import AnalyticsManager from "./test";
 import ValidationManager from "./utils/validate";
+import AnalyticsManager from "./utils/analytics";
 
 const isDev: boolean = process.argv.includes("--dev");
 
