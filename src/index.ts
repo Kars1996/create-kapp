@@ -51,10 +51,11 @@ function parseArgs(): Args {
 }
 
 async function main() {
+    console.log()
     const args = parseArgs();
 
     if (args.version || args.v) {
-        console.log(`${cyan("o")}   KAPP CLI version: ${packageVersion}`);
+        console.log(`${cyan("o")}   KAPP CLI version: ${cyan(packageVersion)}`);
         process.exit(0);
     }
 

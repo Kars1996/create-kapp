@@ -110,7 +110,6 @@ export default class UI {
     }
 
     public static showHelp(): void {
-        console.log();
         console.log(
             `${cyan("o")}   Available commands: ${gray(`v${packageVersion}`)}`
         );
