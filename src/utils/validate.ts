@@ -32,7 +32,6 @@ export default class ValidationManager {
             const latestVersion = data.version;
 
             if (latestVersion !== packageVersion) {
-                UI.bleh();
                 console.log(
                     `${yellow("!")}   Update available: ${cyan(
                         latestVersion
