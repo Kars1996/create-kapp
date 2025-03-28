@@ -3,6 +3,7 @@
 import { cyan, green, white, bold, gray, yellow } from "kolorist";
 import prompts from "prompts";
 import { version as packageVersion } from "../../package.json";
+import { ARG_CONFIG } from "./exports";
 
 export default class UI {
     private static readonly github = cyan("Kars1996");
@@ -110,16 +111,26 @@ export default class UI {
 
     public static showHelp(): void {
         console.log(`${cyan("o")}   KAPP CLI Help ${cyan("+")}`);
+        console.log(`|`);
         console.log(`|   Available commands:`);
         console.log(`${cyan("+")}   ---------------${cyan("+")}`);
         console.log(`|`);
-        console.log(`|   --version, -v        Show CLI version`);
-        console.log(`|   --help, -h           Show this help message`);
-        console.log(`|   --dl=<template>      Download specific template`);
-        console.log(`|   --online, -o         Download from online repository`);
-        console.log(`|   --use=<pm>          Use specific package manager`);
-        console.log(`|   --path=<dir>        Specify installation path`);
-        console.log(`|   --name=<name>       Set project name`);
+    
+        const longestArgLength = Math.max(...Object.keys(ARG_CONFIG).map(arg => 
+            `--${arg}${ARG_CONFIG[arg].type === 'string' ? '=<value>' : ''}`.length
+        ));
+    
+        Object.entries(ARG_CONFIG).forEach(([arg, config]) => {
+            const mainArg = `--${arg}${config.type === 'string' ? '=<value>' : ''}`;
+            const alias = config.alias ? `, -${config.alias}` : '';
+            const padding = ' '.repeat(longestArgLength - mainArg.length + 2);
+            
+            console.log(`|   ${gray(mainArg)}${gray(alias)}${padding}${config.description}`);
+            if (config.default !== undefined) {
+                console.log(`|   ${' '.repeat(longestArgLength + 2)}${gray(`(default: ${config.default})`)}`);
+            }
+        });
+    
         console.log(`|`);
         console.log(`${cyan("+")}   ---------------${cyan("+")}`);
     }

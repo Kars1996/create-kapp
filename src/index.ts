@@ -9,20 +9,44 @@ import { TemplateCategory, icons, templateOptions } from "./data/consts";
 import ValidationManager from "./utils/validate";
 import AnalyticsManager from "./utils/analytics";
 import { version as packageVersion } from "../package.json";
+import { Args, ARG_CONFIG } from "./utils/exports";
 
 const isDev: boolean = process.argv.includes("--dev");
 
-function parseArgs(): Record<string, string | boolean> {
-    const args: Record<string, string | boolean> = {};
-    process.argv.slice(2).forEach((arg) => {
-        if (arg.startsWith("--")) {
-            const [key, value] = arg.slice(2).split("=");
-            args[key] = value || true;
-        } else if (arg.startsWith("-")) {
-            const key = arg.slice(1);
-            args[key] = true;
+function parseArgs(): Args {
+    const args: Args = {};
+
+    Object.entries(ARG_CONFIG).forEach(([key, config]) => {
+        if (config.default !== undefined) {
+            args[key] = config.default;
         }
     });
+
+    for (let i = 2; i < process.argv.length; i++) {
+        const arg = process.argv[i];
+
+        if (arg.startsWith("--")) {
+            const [key, value] = arg.slice(2).split("=");
+            const config = ARG_CONFIG[key];
+
+            if (config) {
+                args[key] = config.type === "boolean" ? true : value || "";
+            }
+        } else if (arg.startsWith("-")) {
+            const key = arg.slice(1);
+
+            const mainArg = Object.entries(ARG_CONFIG).find(
+                ([_, config]) => config.alias === key
+            )?.[0];
+
+            if (mainArg) {
+                const config = ARG_CONFIG[mainArg];
+                args[mainArg] =
+                    config.type === "boolean" ? true : process.argv[++i] || "";
+            }
+        }
+    }
+
     return args;
 }
 
