@@ -14,6 +14,8 @@
 - [ ] - Args Prefill Certain Parts
 - [x] - Update Checking
 - [ ] - Local Config
+- [ ] - Better file path support
+- [ ] - Improve code formatting!!!!
 
 Args
 `--version | --v` Outputs CLI Version
