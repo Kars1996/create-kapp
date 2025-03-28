@@ -8,10 +8,43 @@ import * as fs from "fs";
 import { TemplateCategory, icons, templateOptions } from "./data/consts";
 import ValidationManager from "./utils/validate";
 import AnalyticsManager from "./utils/analytics";
+import { version as packageVersion } from "../package.json";
 
 const isDev: boolean = process.argv.includes("--dev");
 
+function parseArgs(): Record<string, string | boolean> {
+    const args: Record<string, string | boolean> = {};
+    process.argv.slice(2).forEach((arg) => {
+        if (arg.startsWith("--")) {
+            const [key, value] = arg.slice(2).split("=");
+            args[key] = value || true;
+        } else if (arg.startsWith("-")) {
+            const key = arg.slice(1);
+            args[key] = true;
+        }
+    });
+    return args;
+}
+
 async function main() {
+    const args = parseArgs();
+
+    if (args.version || args.v) {
+        console.log(`${cyan("o")}   KAPP CLI version: ${packageVersion}`);
+        process.exit(0);
+    }
+
+    if (args.help || args.h) {
+        UI.showHelp();
+        process.exit(0);
+    }
+
+    const prefilledPath = typeof args.path === "string" ? args.path : ".";
+    const prefilledName =
+        typeof args.name === "string" ? args.name : "kars-project";
+
+    await ValidationManager.checkForUpdates();
+
     UI.header(isDev);
     AnalyticsManager.sendAnalytics({ eventName: "cli_started" });
 
@@ -35,7 +68,7 @@ async function main() {
     );
     UI.bleh();
 
-    const response = await UI.text("Select a filePath", ".");
+    const response = await UI.text("Select a filePath", prefilledPath);
 
     try {
         if (!isDev) {
@@ -56,7 +89,7 @@ async function main() {
 
     const name = await UI.text(
         "What do you want your project called?",
-        "kars-project"
+        prefilledName
     );
     await Setup.editName(name);
 
