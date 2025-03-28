@@ -14,10 +14,39 @@ export default class ValidationManager {
     }
 
     public static async wifiCheck(): Promise<boolean> {
-        // TODO: More Robust Check
+        const TEST_URLS = [
+            'https://www.google.com',
+            'https://www.cloudflare.com',
+            'https://www.github.com'
+        ];
+        
+        const timeout = 5000;
+        
         try {
-            await fetch("google.com");
-            return true;
+            for (const url of TEST_URLS) {
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), timeout);
+                    
+                    const response = await fetch(url, {
+                        method: 'HEAD',
+                        signal: controller.signal
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    
+                    if (response.ok) {
+                        return true;
+                    }
+                } catch {
+                    continue;
+                }
+            }
+            
+            console.log(
+                `${yellow("!")}   No connection detected. Online mode disabled.`
+            );
+            return false;
         } catch (error) {
             return false;
         }

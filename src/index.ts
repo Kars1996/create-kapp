@@ -68,8 +68,10 @@ async function main() {
         typeof args.name === "string" ? args.name : "kars-project";
 
     await ValidationManager.checkForUpdates();
-
+    await ValidationManager.wifiCheck();
+    
     UI.header(isDev);
+
     AnalyticsManager.sendAnalytics({ eventName: "cli_started" });
 
     const templateCategory: TemplateCategory = await UI.choice(
