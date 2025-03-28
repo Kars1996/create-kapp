@@ -111,6 +111,7 @@ export default class UI {
     public static showHelp(): void {
         console.log(`${cyan("o")}   KAPP CLI Help ${cyan("+")}`);
         console.log(`|   Available commands:`);
+        console.log(`${cyan("+")}   ---------------${cyan("+")}`);
         console.log(`|`);
         console.log(`|   --version, -v        Show CLI version`);
         console.log(`|   --help, -h           Show this help message`);

@@ -2,7 +2,7 @@
 - [x] - Wifi Check
 - [ ] - Local Install thing
 - [ ] - More Quickstart Options
-- [ ] - Folder Restructure
+- [x] - Folder Restructure
 - [x] - Analytics
 - [ ] - Validation Functions
 - [ ] - Code Optimizations
@@ -10,9 +10,9 @@
 - [ ] - Change Usage Flow
 - [ ] - Halloween/Christmas Theme
 - [ ] - More Args (No Analytics, Args only install)
-- [ ] - Help Command
+- [x] - Help Command
 - [ ] - Args Prefill Certain Parts
-- [ ] - Update Checking
+- [x] - Update Checking
 - [ ] - Local Config
 
 Args
