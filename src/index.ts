@@ -1,36 +1,58 @@
 #!/usr/bin/env node
 
-import UI from "./UI";
-import Setup from "./setup";
-import prompts from "prompts";
-import { cyan, green, red, white } from "kolorist";
-import { download } from "./download";
+import UI from "./utils/UI";
+import Setup from "./lib/setup";
+import { cyan, red } from "kolorist";
+import { download } from "./lib/download";
 import * as fs from "fs";
-import { exec } from "child_process";
+import { TemplateCategory, icons, templateOptions } from "./data/consts";
+import ValidationManager from "./utils/validate";
+import AnalyticsManager from "./utils/analytics";
+import { version as packageVersion } from "../package.json";
 
-const templateOptions = {
-    "Next.js": ["Template", "APITemplate"],
-    "Discord.js": ["DJS14Template", "DJS14Base"],
-    General: ["NextTemplate", "APITemplate"],
-};
+const isDev: boolean = process.argv.includes("--dev");
 
-const icons = {
-    "Next.js": "▲",
-    "Discord.js": "§",
-    General: "∂",
-};
-
-const dev = process.argv.includes("--test");
-
-type TemplateCategory = keyof typeof templateOptions;
+function parseArgs(): Record<string, string | boolean> {
+    const args: Record<string, string | boolean> = {};
+    process.argv.slice(2).forEach((arg) => {
+        if (arg.startsWith("--")) {
+            const [key, value] = arg.slice(2).split("=");
+            args[key] = value || true;
+        } else if (arg.startsWith("-")) {
+            const key = arg.slice(1);
+            args[key] = true;
+        }
+    });
+    return args;
+}
 
 async function main() {
-    UI.header(dev);
+    const args = parseArgs();
+
+    if (args.version || args.v) {
+        console.log(`${cyan("o")}   KAPP CLI version: ${packageVersion}`);
+        process.exit(0);
+    }
+
+    if (args.help || args.h) {
+        UI.showHelp();
+        process.exit(0);
+    }
+
+    const prefilledPath = typeof args.path === "string" ? args.path : ".";
+    const prefilledName =
+        typeof args.name === "string" ? args.name : "kars-project";
+
+    await ValidationManager.checkForUpdates();
+
+    UI.header(isDev);
+    AnalyticsManager.sendAnalytics({ eventName: "cli_started" });
 
     const templateCategory: TemplateCategory = await UI.choice(
         "Which Template Category would you like to use?",
-        ["Next.js", "Discord.js", "General"]
+        Object.keys(templateOptions) as (keyof typeof templateOptions)[]
     );
+    ValidationManager.definedCheck(templateCategory);
     UI.bleh();
     console.log(
         `${cyan("o")}   ${icons[templateCategory]} ${cyan(
@@ -46,15 +68,15 @@ async function main() {
     );
     UI.bleh();
 
-    const response = await UI.text("Select a filePath", ".");
+    const response = await UI.text("Select a filePath", prefilledPath);
 
     try {
-        if (!dev) {
+        if (!isDev) {
             await download(response, template);
         }
     } catch {
         console.error(red("Failed to download template."));
-        UI.feedback();
+        UI.footer();
         process.exit(1);
     }
 
@@ -67,7 +89,7 @@ async function main() {
 
     const name = await UI.text(
         "What do you want your project called?",
-        "kars-project"
+        prefilledName
     );
     await Setup.editName(name);
 
@@ -90,7 +112,7 @@ async function main() {
         }
     }
 
-    UI.end();
+    UI.footer();
 }
 
 main().catch((err) => console.error(red(`Error: ${err.message}`)));

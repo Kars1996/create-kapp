@@ -81,3 +81,33 @@ kapp-cli/
 ---
 
 Made with 💙 by [Kars](https://kars.bio) - [GitHub](https://github.com/Kars1996)
+```
+create-kapp
+├─ .gitattributes
+├─ .gitignore
+├─ .npmignore
+├─ LICENSE
+├─ package.json
+├─ README.md
+├─ scripts
+│  └─ publish.js
+├─ src
+│  ├─ data
+│  │  ├─ args.ts
+│  │  └─ consts.ts
+│  ├─ index.ts
+│  ├─ lib
+│  │  ├─ download.ts
+│  │  └─ setup.ts
+│  ├─ release
+│  ├─ types
+│  │  └─ index.d.ts
+│  └─ utils
+│     ├─ analytics.ts
+│     ├─ logging.ts
+│     ├─ UI.ts
+│     └─ validate.ts
+├─ TODO.md
+└─ tsconfig.json
+
+```

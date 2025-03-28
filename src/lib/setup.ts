@@ -3,7 +3,7 @@
 import * as fs from "fs";
 import { exec } from "child_process";
 import { red, cyan } from "kolorist";
-import UI from "./UI";
+import UI from "../utils/UI";
 
 export default class Setup {
     public static async initGitRepo(): Promise<boolean> {

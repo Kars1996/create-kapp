@@ -1,0 +1,13 @@
+{
+    "cSpell.words": [
+        "bleh",
+        "cliversion",
+        "consts",
+        "Initialised",
+        "kolorist"
+    ],
+    "editor.codeActionsOnSave": [
+        "source.addMissingImports",
+        "source.fixAll.eslint"
+    ],
+}

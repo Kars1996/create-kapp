@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { cyan, green, red, white, bold, gray } from "kolorist";
+import { cyan, green, white, bold, gray, yellow } from "kolorist";
 import prompts from "prompts";
+import { version as packageVersion } from "../../package.json";
 
 export default class UI {
-    // TODO: Fix terminal links
     private static readonly github = cyan("Kars1996");
     private static readonly website = cyan("kars.bio");
 
@@ -90,7 +90,8 @@ export default class UI {
         console.log(`${cyan("o")}   ${white(bold(prompt))}`);
         this.bleh();
     }
-    public static end(): void {
+
+    public static footer(): void {
         console.log(
             green(
                 `${cyan("o")}   ${bold("Template Successfully Initialized!")}`
@@ -107,7 +108,43 @@ export default class UI {
         console.log(`${cyan("+")}   Have Feedback? Dm me @ ${this.github}`);
     }
 
-    public static feedback(): void {
-        console.log(red(`+ Have Feedback? Visit my **Github**`));
+    public static showHelp(): void {
+        console.log(`${cyan("o")}   KAPP CLI Help ${cyan("+")}`);
+        console.log(`|   Available commands:`);
+        console.log(`|`);
+        console.log(`|   --version, -v        Show CLI version`);
+        console.log(`|   --help, -h           Show this help message`);
+        console.log(`|   --dl=<template>      Download specific template`);
+        console.log(`|   --online, -o         Download from online repository`);
+        console.log(`|   --use=<pm>          Use specific package manager`);
+        console.log(`|   --path=<dir>        Specify installation path`);
+        console.log(`|   --name=<name>       Set project name`);
+        console.log(`|`);
+        console.log(`${cyan("+")}   ---------------${cyan("+")}`);
+    }
+
+    private static getThemeColors(): { primary: string; secondary: string } {
+        const date = new Date();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+
+        if (month === 10) {
+            return {
+                primary: "\x1b[38;2;255;140;0m", // Orange
+                secondary: "\x1b[38;2;75;0;130m", // Purple
+            };
+        }
+
+        if (month === 12) {
+            return {
+                primary: "\x1b[38;2;255;0;0m", // Red
+                secondary: "\x1b[38;2;0;128;0m", // Green
+            };
+        }
+
+        return {
+            primary: "\x1b[36m",
+            secondary: "\x1b[37m",
+        };
     }
 }
