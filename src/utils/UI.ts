@@ -110,31 +110,44 @@ export default class UI {
     }
 
     public static showHelp(): void {
-        console.log(`${cyan("o")}   KAPP CLI Help ${cyan("+")}`);
-        console.log(`|`);
-        console.log(`|   Available commands:`);
+        console.log()
+        console.log(`${cyan("o")}   Available commands: (v${packageVersion})`);
         console.log(`${cyan("+")}   ---------------${cyan("+")}`);
         console.log(`|`);
-    
-        const longestArgLength = Math.max(...Object.keys(ARG_CONFIG).map(arg => 
-            `--${arg}${ARG_CONFIG[arg].type === 'string' ? '=<value>' : ''}`.length
-        ));
-    
-        Object.entries(ARG_CONFIG).forEach(([arg, config]) => {
-            const mainArg = `--${arg}${config.type === 'string' ? '=<value>' : ''}`;
-            const alias = config.alias ? `, -${config.alias}` : '';
-            const padding = ' '.repeat(longestArgLength - mainArg.length + 2);
-            
-            console.log(`|   ${gray(mainArg)}${gray(alias)}${padding}${config.description}`);
-            if (config.default !== undefined) {
-                console.log(`|   ${' '.repeat(longestArgLength + 2)}${gray(`(default: ${config.default})`)}`);
-            }
+
+        const argsList = Object.entries(ARG_CONFIG).map(([arg, config]) => {
+            const mainArg = `--${arg}${
+                config.type === "string" ? "=<value>" : ""
+            }`;
+            const alias = config.alias ? `, -${config.alias}` : "";
+            return {
+                command: `${mainArg}${alias}`,
+                description: config.description,
+                default: config.default,
+            };
         });
-    
+
+        const longestCommand = Math.max(
+            ...argsList.map((item) => item.command.length)
+        );
+        const PADDING_AFTER_COMMAND = 4;
+
+        argsList.forEach(({ command, description, default: defaultValue }) => {
+            const padding = " ".repeat(
+                longestCommand - command.length + PADDING_AFTER_COMMAND
+            );
+            const line = `|   ${gray(command)}${padding}${description}${
+                defaultValue
+                    ? gray(` (default: ${cyan(defaultValue.toString())})`)
+                    : ""
+            }`;
+
+            console.log(line);
+        });
+
         console.log(`|`);
         console.log(`${cyan("+")}   ---------------${cyan("+")}`);
     }
-
     private static getThemeColors(): { primary: string; secondary: string } {
         const date = new Date();
         const month = date.getMonth() + 1;
