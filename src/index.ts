@@ -68,8 +68,8 @@ async function main() {
         typeof args.name === "string" ? args.name : "kars-project";
 
     await ValidationManager.checkForUpdates();
-    await ValidationManager.wifiCheck();
-    
+    const isOnline = await ValidationManager.wifiCheck();
+
     UI.header(isDev);
 
     AnalyticsManager.sendAnalytics({ eventName: "cli_started" });
@@ -98,7 +98,7 @@ async function main() {
 
     try {
         if (!isDev) {
-            await download(response, template);
+            await download(response, template, "master", isOnline);
         }
     } catch {
         console.error(red("Failed to download template."));

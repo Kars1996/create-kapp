@@ -60,6 +60,7 @@ export default class Setup {
             });
         });
     }
+
     public static async commit(): Promise<boolean> {
         return new Promise((resolve, reject) => {
             exec("git add .", (err) => {
@@ -97,7 +98,6 @@ export default class Setup {
         });
     }
 
-    // Method to install packages using Yarn
     public static async Yarninstall(): Promise<boolean> {
         return new Promise((resolve, reject) => {
             UI.print("Running yarn install...");

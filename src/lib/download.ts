@@ -10,7 +10,8 @@ import { cyan } from "kolorist";
 export async function download(
     folder: string,
     repo: string,
-    branch: string = "master"
+    branch: string = "master",
+    isOnline: boolean = true
 ) {
     // ? Credit to nitlix
     console.log(`${cyan("o")}   Installing...`);
@@ -29,7 +30,7 @@ export async function download(
         fs.mkdirSync(outputPath, { recursive: true });
     }
 
-    fs.writeFileSync(zipPath, buffer);
+    fs.writeFileSync(zipPath, new Uint8Array(buffer));
     await extract(zipPath, { dir: outputPath });
     fs.unlinkSync(zipPath);
 
