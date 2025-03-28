@@ -118,10 +118,12 @@ export default class UI {
         console.log(`|`);
 
         const argsList = Object.entries(ARG_CONFIG).map(([arg, config]) => {
-            const mainArg = `--${arg}${
-                config.type === "string" ? "=<value>" : ""
-            }`;
-            const alias = config.alias ? `, -${config.alias}` : "";
+            const valueStr =
+                config.type === "string"
+                    ? `${gray("=")}${gray("<")}value${gray(">")}`
+                    : "";
+            const mainArg = `${gray("--")}${arg}${valueStr}`;
+            const alias = config.alias ? `, ${gray("-")}${config.alias}` : "";
             return {
                 command: `${mainArg}${alias}`,
                 description: config.description,
@@ -130,15 +132,18 @@ export default class UI {
         });
 
         const longestCommand = Math.max(
-            ...argsList.map((item) => item.command.length)
+            ...argsList.map((item) => {
+                return item.command.replace(/\x1b\[[0-9;]*m/g, "").length;
+            })
         );
         const PADDING_AFTER_COMMAND = 4;
 
         argsList.forEach(({ command, description, default: defaultValue }) => {
+            const commandLength = command.replace(/\x1b\[[0-9;]*m/g, "").length;
             const padding = " ".repeat(
-                longestCommand - command.length + PADDING_AFTER_COMMAND
+                longestCommand - commandLength + PADDING_AFTER_COMMAND
             );
-            const line = `|   ${gray(command)}${padding}${description}${
+            const line = `|   ${command}${padding}${description}${
                 defaultValue
                     ? gray(` (default: ${cyan(defaultValue.toString())})`)
                     : ""
@@ -150,6 +155,7 @@ export default class UI {
         console.log(`|`);
         console.log(`${cyan("+")}   ---------------${cyan("+")}`);
     }
+
     private static getThemeColors(): { primary: string; secondary: string } {
         const date = new Date();
         const month = date.getMonth() + 1;
