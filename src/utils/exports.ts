@@ -1,7 +1,7 @@
 export interface ArgConfig {
     alias?: string;
     description: string;
-    type: 'string' | 'boolean';
+    type: 'string' | 'boolean' | "multi";
     default?: string | boolean;
 }
 
@@ -42,5 +42,10 @@ export const ARG_CONFIG: Record<string, ArgConfig> = {
         description: 'Set project name',
         type: 'string',
         default: 'kars-project'
-    }
+    },
+    'config': {
+        alias: 'c',
+        description: "Manage CLI configuration",
+        type: 'multi',
+    },
 } as const;
