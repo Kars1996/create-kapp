@@ -25,6 +25,9 @@ Args
 `--use<package>` uses a specific package manager (default npm)
 `--path=` Specifies Path (default cwd)
 `--name=` Name of the project (default kars-project)
+`--resynced, -r` toggles resynced mode (edits readme.md for nextjs, changes copywrite global)
+
+Auto update copywrite year
 
 Config
 > Autoupdate
